@@ -6,8 +6,8 @@ import classes from './Counter.module.css';
 const Counter = () => {
   const dispatch = useDispatch();
 
-  const counter = useSelector(state => state.counter);
-  const show = useSelector(state => state.showCounter);
+  const counter = useSelector(state => state.counter.counter); // This change is because the store (in 'index.js') now sets the value of 'reducer' to an object, and the 'counterSlice.reducer' value has a key of 'counter'. So the first 'counter' accesses the 'counterSlice.reducer', and the second 'counter' accesses the 'counter' state within this
+  const show = useSelector(state => state.counter.showCounter);
 
   const incrementHandler = () => {
     dispatch(counterActions.increment());
