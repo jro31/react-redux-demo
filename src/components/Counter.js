@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 
+import { counterActions } from '../store/index';
 import classes from './Counter.module.css';
 
 const Counter = () => {
@@ -9,19 +10,22 @@ const Counter = () => {
   const show = useSelector(state => state.showCounter);
 
   const incrementHandler = () => {
-    dispatch({ type: 'increment' })
+    dispatch(counterActions.increment());
   };
 
   const increaseHandler = () => {
-    dispatch({ type: 'increase', amount: 5 }) // Just an example, usually the '5' would be a dynamic value fetched from, for example, a user input
+    // Here we pass-in the payload data (can be any kind of value, for example an object if necessary)
+    // It will be stored, by redux toolkit, in a field named 'payload'
+    // So the automatically created action object will be something like '{ type: 'someUniqueIdentifier', payload: 5 }'
+    dispatch(counterActions.increase(5))
   };
 
   const decrementHandler = () => {
-    dispatch({ type: 'decrement' })
+    dispatch(counterActions.decrement())
   };
 
   const toggleCounterHandler = () => {
-    dispatch({ type: 'toggle' })
+    dispatch(counterActions.toggleCounter())
   };
 
   return (
